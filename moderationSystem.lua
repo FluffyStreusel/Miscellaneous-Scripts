@@ -1,8 +1,5 @@
---[[
-	Moderator Commands ~ Stormersoul
---]]
-
 local Debris = game:GetService'Debris'
+local Players = game:GetService'Players'
 
 local Administrators = {
 	["Stormersoul"] = true,
@@ -30,7 +27,7 @@ game.Players.PlayerAdded:connect(function(plr)
 end)
 
 function findPlayer(uName)
-	for _, player in ipairs(game.Players:GetPlayers()) do
+	for _, player in ipairs(Players:GetPlayers()) do
 		if player.Name:lower() == uName:lower() then
 			return player
 		end
@@ -65,12 +62,12 @@ function onChatted(message, player)
 	
 end
 
-game.Players.PlayerAdded:connect(function(player)
+game.Players.PlayerAdded:connect(function(aPlayer)
 	local plrRank = player:GetRoleInGroup(2987620)
 	if plrRank == "Admin" or plrRank == "Head Admin" then
-		table.insert(Administrators, player.Name)
+		table.insert(Administrators, aPlayer.Name)
 	end
-	player.Chatted:connect(function(message)
-		onChatted(message, player)
+	aPlayer.Chatted:connect(function(message)
+		onChatted(message, aPlayer)
 	end)
 end)
